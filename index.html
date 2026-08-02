@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     SKYLINE COFFEE ROASTERS — LANDING PAGE
+     Built by: Groundsite (groundsite.za)
+     Business: Skyline Coffee Roasters, Durban North
+     ============================================================
+     HOW TO CUSTOMISE THIS FILE:
+     Press Ctrl+F and search for "CLIENT:" to jump to every
+     line you need to change for a new client.
+     ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CLIENT: Page title -->
+  <title>Skyline Coffee Roasters — Durban North</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ──────────────────────────────────────── */
+    :root {
+      /* CLIENT: Brand colours
+         Skyline palette: linen bg, near-black text, burnt orange accent
+         To retheme: change --accent for a different highlight colour
+         e.g. sage green: #4A7A5A | navy: #1A3A5C | burgundy: #7A1A2A */
+      --linen:   #EEEAE4;
+      --cream:   #F8F5F0;
+      --ink:     #0D0D0D;
+      --charcoal:#2A2A2A;
+      --accent:  #C4541A;
+      --stone:   #8A8070;
+      --border:  rgba(13,13,13,0.1);
+      --white:   #FFFFFF;
+
+      --display: 'Playfair Display', serif;
+      --body:    'Inter', sans-serif;
+      --gap:     clamp(4rem, 8vw, 7rem);
+    }
+
+    /* ─── RESET ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--linen); color: var(--ink); font-family: var(--body); font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 60px;
+      background: var(--linen);
+      border-bottom: 1px solid var(--border);
+    }
+    /* CLIENT: Nav logo — business name / shorthand
+       OPTION A — Text (current)
+       OPTION B — Image: <div class="nav-logo"><img src="logo.png" alt="Skyline" /></div> */
+    .nav-logo {
+      font-family: var(--body); font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.06em; color: var(--ink);
+    }
+    /* CLIENT: Nav logo sizing
+       Current logo: skyline-logo.png (dark background, white text)
+       The logo has a dark background which blends into the linen nav —
+       to fix this properly, get a transparent PNG version of the logo
+       (remove background at remove.bg) and name it skyline-logo-transparent.png.
+       For now we use CSS filter to make the dark bg invisible:
+       filter: invert(1) — turns white logo dark to match the linen nav.
+       If the transparent PNG version is available, remove the filter line. */
+    .nav-logo img {
+      max-height: 36px; width: auto; display: block; object-fit: contain;
+      filter: invert(1);
+    }
+    .footer-logo-img {
+      max-height: 28px; width: auto; display: block; object-fit: contain;
+    }
+
+    .nav-center { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-center a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); transition: color 0.2s; }
+    .nav-center a:hover { color: var(--ink); }
+
+    /* CLIENT: Nav CTA button */
+    .nav-cta {
+      background: var(--ink); color: var(--white);
+      padding: 0.55rem 1.4rem; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--charcoal); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; }
+    .hamburger span { display: block; width: 100%; height: 1.5px; background: var(--ink); border-radius: 1px; transition: all 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 99; background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-family: var(--display); font-size: clamp(2rem, 8vw, 3rem); color: var(--ink); }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mob-cta { background: var(--ink); color: var(--white); padding: 0.8rem 2.5rem; border-radius: 50px; font-family: var(--body); font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh; padding: 7rem 5vw 4rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+      background: var(--linen);
+    }
+    .hero-left { }
+    /* CLIENT: Hero headline — large italic serif + bold on second line */
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6.5vw, 6rem);
+      line-height: 1.0; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .hero-title .italic { font-style: italic; font-weight: 400; display: block; }
+    .hero-title .bold   { font-style: normal; font-weight: 700; display: block; }
+
+    /* CLIENT: Hero subtext */
+    .hero-sub { font-size: 0.9rem; color: var(--stone); max-width: 380px; margin-bottom: 1.8rem; line-height: 1.7; }
+
+    /* Rating badges */
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.8rem; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 1rem; border-radius: 50px;
+      border: 1px solid var(--border); background: var(--white);
+      font-size: 0.78rem; font-weight: 400; color: var(--ink);
+    }
+    .badge .star { color: var(--accent); font-size: 0.85rem; }
+    .badge .rating-num { font-weight: 600; }
+    .badge .reviews { color: var(--stone); font-size: 0.72rem; }
+
+    /* Hero action buttons */
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+    /* CLIENT: Hero photo — tall rounded rectangle right side
+       Replace 'hero-photo.jpg' with the client's coffee/food photo.
+       Best: portrait-orientation photo, coffee being poured, latte art, or food.
+       Compress under 400KB at squoosh.app. */
+    .hero-right { }
+    .hero-photo {
+      width: 100%; aspect-ratio: 3/4; border-radius: 20px;
+      overflow: hidden; background: var(--ink);
+      display: flex; align-items: center; justify-content: center; font-size: 8rem;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+
+    /* ─── BUTTONS ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.65rem 1.3rem; border-radius: 50px;
+      font-family: var(--body); font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.02em; cursor: pointer; transition: all 0.2s; border: none;
+    }
+    .btn-solid { background: var(--ink); color: var(--white); }
+    .btn-solid:hover { background: var(--charcoal); transform: translateY(-1px); }
+    .btn-ghost { background: var(--white); color: var(--ink); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .btn-whatsapp { background: #25D366; color: #fff; }
+    .btn-whatsapp:hover { background: #1ebe5a; }
+
+    /* ─── THREE COLUMN DARK SECTION ──────────────────── */
+    .pillars {
+      background: var(--ink); padding: 3.5rem 5vw;
+    }
+    .pillars-rule { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 3.5rem; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+    .pillar-num {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .pillar-title { font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--white); margin-bottom: 0.8rem; }
+    .pillar-body { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+    /* ─── REVIEW SECTION ──────────────────────────────── */
+    .review-section { background: var(--linen); padding: var(--gap) 5vw; text-align: center; }
+    .review-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--stone); margin-bottom: 2.5rem; }
+    .review-quote {
+      font-family: var(--display); font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      font-style: italic; font-weight: 400; color: var(--ink);
+      max-width: 900px; margin: 0 auto 2rem; line-height: 1.35; letter-spacing: -0.02em;
+    }
+    .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+
+    /* ─── VISIT SECTION ───────────────────────────────── */
+    .visit-section { background: var(--linen); padding: 0 5vw var(--gap); }
+    .visit-card {
+      background: var(--white); border-radius: 16px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden; border: 1px solid var(--border);
+    }
+    .visit-left { padding: 3rem; border-right: 1px solid var(--border); }
+    .visit-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .visit-address { font-family: var(--display); font-size: 1.6rem; font-weight: 400; color: var(--ink); margin-bottom: 0.2rem; line-height: 1.2; }
+    .visit-suburb { font-size: 0.88rem; color: var(--stone); margin-bottom: 1rem; }
+    .visit-phone { font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: 1.2rem; display: block; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+    .visit-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+    /* Hours card right side */
+    .visit-right { padding: 3rem; }
+    .hours-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem; }
+    .hours-row { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+    .hours-row:last-of-type { border-bottom: none; }
+    .hours-row .day { font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.75rem; color: var(--ink); }
+    .hours-row .time { color: var(--stone); }
+    .hours-row.highlight .day,
+    .hours-row.highlight .time { color: var(--accent); font-weight: 600; }
+    .hours-note { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-top: 1.2rem; }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--linen); border-top: 1px solid var(--border);
+      padding: 1.5rem 5vw;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); }
+    .footer-icons { display: flex; gap: 1rem; }
+    .footer-icons a {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink); transition: all 0.2s;
+    }
+    .footer-icons a:hover { background: var(--ink); color: var(--white); }
+    .footer-icons svg { width: 15px; height: 15px; }
+    .footer-price { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); }
+
+    /* ─── SCROLL REVEAL ───────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 860px) {
+      .nav-center, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .hero { grid-template-columns: 1fr; padding-top: 5rem; }
+      .hero-right { order: -1; }
+      .hero-photo { aspect-ratio: 16/9; border-radius: 12px; }
+      .pillars-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .visit-card { grid-template-columns: 1fr; }
+      .visit-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-title { font-size: clamp(2.5rem, 9vw, 4rem); }
+      /* Two location cards stack on mobile */
+      .visit-section > div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* Hours + online grid stacks on mobile */
+      .visit-section div[style*="grid-template-columns:auto 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* Gallery stacks to 2 columns on mobile */
+      section > div[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: repeat(2,1fr) !important;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE MENU ─────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <!-- CLIENT: Mobile nav links -->
+    <a href="#beans" onclick="closeMobile()">The Beans</a>
+    <a href="#reviews" onclick="closeMobile()">Reviews</a>
+    <a href="#visit" onclick="closeMobile()">Visit</a>
+    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" class="mob-cta" onclick="closeMobile()">Order Now</a>
+  </div>
+
+  <!-- NAV ─────────────────────────────────────────────── -->
+  <nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+    <!-- CLIENT: Nav logo
+         OPTION A — Image (current): uses skyline-logo.png
+         Upload skyline-logo.png to the same GitHub repo folder as index.html.
+         For best results on the light nav, get a transparent background PNG
+         from remove.bg and name it skyline-logo-transparent.png, then update src below.
+         OPTION B — Text fallback: <div class="nav-logo">SKYLINE / DN</div> -->
+    <div class="nav-logo">
+      <img src="skyline-logo.png" alt="Skyline Coffee Co." />
+    </div>
+
+    <ul class="nav-center">
+      <!-- CLIENT: Nav links — update labels if sections are renamed -->
+      <li><a href="#beans">The Beans</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+
+    <!-- CLIENT: Nav CTA — links to Uber Eats ordering page -->
+    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" class="nav-cta">ORDER NOW</a>
+  </nav>
+
+  <!-- HERO ────────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+
+      <!-- CLIENT: Hero headline — italic line on top, bold line below
+           Keep each line short — this font is large.
+           Example: "The morning's / best decision."
+           Example: "Roasted with / intention." -->
+      <h1 class="hero-title reveal">
+        <span class="italic">Durban's finest</span>
+        <span class="bold">Daily Ritual.</span>
+      </h1>
+
+      <!-- CLIENT: Hero subtext — one or two sentences max -->
+      <p class="hero-sub reveal">Freshly roasted on Mackeurtan Avenue. A sanctuary for coffee purists and pastry lovers in the heart of Durban North.</p>
+
+      <!-- CLIENT: Rating badges — update rating, review count, and price range -->
+      <div class="hero-badges reveal">
+        <div class="badge">
+          <span class="star">★</span>
+          <span class="rating-num">4.0</span>
+          <span class="reviews">12 REVIEWS</span>
+        </div>
+        <div class="badge">R100 – R200 PER PERSON</div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           CLIENT: HERO ACTION BUTTONS
+           Current buttons match the Lovable design exactly:
+           Order Collection · Order Delivery · Directions · Call
+
+           TO LINK ORDER COLLECTION TO UBER EATS:
+           Change href="#" on "Order Collection" to the Uber Eats URL.
+
+           TO LINK ORDER DELIVERY TO MR D:
+           Change href="#" on "Order Delivery" to the Mr D URL.
+
+           TO ADD WHATSAPP:
+           <a href="https://wa.me/27824442492" class="btn btn-whatsapp">WhatsApp</a>
+
+           TO REMOVE A BUTTON:
+           Delete the <a> tag. Flex layout recentres automatically.
+      ═══════════════════════════════════════════════════════ -->
+      <div class="hero-actions reveal">
+        <!-- CLIENT: Order button — links to Uber Eats -->
+        <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" class="btn btn-solid">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Order on Uber Eats
+        </a>
+        <!-- CLIENT: Menu PDF button — placeholder until client sends menu.
+             STEP 1: Ask the client for their menu as a PDF.
+             STEP 2: Save it as exactly: menu.pdf (all lowercase)
+             STEP 3: Upload menu.pdf to the same GitHub folder as index.html
+             STEP 4: The button will work automatically — no code changes needed.
+             To remove this button entirely: delete this <a> tag. -->
+        <a href="menu.pdf" target="_blank" class="btn btn-ghost">📄 View Menu</a>
+        <!-- CLIENT: Directions button — Google Maps -->
+        <a href="https://maps.google.com/?q=28+Mackeurtan+Ave+Durban+North" target="_blank" class="btn btn-ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Directions
+        </a>
+        <!-- CLIENT: Call button -->
+        <a href="tel:+27824442492" class="btn btn-ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.38 2 2 0 0 1 3.92 1.17l3-.02a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+          Call
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right reveal">
+      <!-- CLIENT: Hero photo — tall portrait image right side of hero.
+           Current image: skyline-hero.jpg (Skyline branded latte cup)
+           To swap: rename your new photo to skyline-hero.jpg and replace in the folder.
+           Portrait orientation works best here. Compress under 400KB at squoosh.app. -->
+      <div class="hero-photo">
+        <img src="skyline-hero.jpg" alt="Skyline Coffee" />
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PILLARS (DARK SECTION) ───────────────────── -->
+  <section class="pillars" id="beans">
+    <hr class="pillars-rule" />
+    <div class="pillars-grid">
+
+      <!-- CLIENT: Pillar 1 — The Coffee -->
+      <div class="reveal">
+        <p class="pillar-num">01 / THE COFFEE</p>
+        <h3 class="pillar-title">Masterful Roasts</h3>
+        <p class="pillar-body">Consistently excellent cups prepared by our expert baristas, including Siya and the team.</p>
+      </div>
+
+      <!-- CLIENT: Pillar 2 — The Food -->
+      <div class="reveal">
+        <p class="pillar-num">02 / THE FOOD</p>
+        <h3 class="pillar-title">Artisan Pastries</h3>
+        <p class="pillar-body">From buttery croissants to delicious open sandwiches, every bite is crafted with care.</p>
+      </div>
+
+      <!-- CLIENT: Pillar 3 — The Space -->
+      <div class="reveal">
+        <p class="pillar-num">03 / THE SPACE</p>
+        <h3 class="pillar-title">Mackeurtan Gem</h3>
+        <p class="pillar-body">A cozy, welcoming environment perfect for quick morning pick-ups or lazy weekend brunches.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MEDIA CAROUSEL
+       Netflix-style scrolling carousel with arrow navigation,
+       drag/swipe on mobile, and support for both images and videos.
+
+       HOW TO ADD MORE IMAGES:
+       Copy this block and paste it before the closing </div> of .carousel-track:
+         <div class="carousel-slide">
+           <img src="YOUR-FILENAME.jpg" alt="Description" />
+         </div>
+       Name the file and upload it to the same GitHub folder as index.html.
+
+       HOW TO ADD A VIDEO (no sound, autoplay loop):
+       Copy this block and paste it before the closing </div> of .carousel-track:
+         <div class="carousel-slide">
+           <video autoplay muted loop playsinline>
+             <source src="YOUR-VIDEO.mp4" type="video/mp4" />
+           </video>
+         </div>
+       Download Instagram Reels as MP4 at SnapInsta.app
+       Keep video files under 5MB for fast loading.
+       Upload the MP4 to the same GitHub folder as index.html.
+
+       HOW TO REMOVE AN ITEM:
+       Delete the entire <div class="carousel-slide"> block.
+
+       HOW MANY CAN I ADD?
+       As many as you want. The carousel handles it automatically.
+  ═══════════════════════════════════════════════════════ -->
+  <section style="padding:0;background:var(--ink);position:relative;overflow:hidden;">
+
+    <!-- Left arrow -->
+    <button onclick="slideCarousel(-1)" aria-label="Previous" style="position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.7);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;backdrop-filter:blur(4px);" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <!-- Right arrow -->
+    <button onclick="slideCarousel(1)" aria-label="Next" style="position:absolute;right:1.2rem;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.7);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;backdrop-filter:blur(4px);" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <!-- Carousel track -->
+    <div id="carouselTrack" style="display:flex;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;cursor:grab;user-select:none;" class="carousel-track">
+
+      <!-- ── CAROUSEL ITEMS ─────────────────────────────
+           Each item below is one slide. Add or remove freely.
+           TO ADD A NEW IMAGE:
+           Copy a slide block, paste it before the closing </div> of the track,
+           change the src filename, and upload the image to the GitHub folder.
+      ── -->
+
+      <!-- Slide 1: Chocolate cake -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c1-choc-cake.jpg" alt="Chocolate Cake" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 2: Breakfast wrap -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c2-breakfast-wrap.jpg" alt="Breakfast Wrap" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 3: Chocolate drink -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c3-choc-drink.jpg" alt="Chocolate Drink" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 4: Frappe -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c4-frappe.jpg" alt="Skyline Frappe" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 5: Coconut cake -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c5-coconut-cake.jpg" alt="Coconut Cake" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 6: Chicken wrap -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c6-chicken-wrap.jpg" alt="Chicken Wrap" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 7: Crepes -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c7-crepes.jpg" alt="Crepes" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 8: Smoothies -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c8-smoothies.jpg" alt="Smoothies" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 9: Toast and coffee -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c9-toast-coffee.jpg" alt="Toast and Coffee" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 10: Croissant and latte -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c10-croissant-latte.jpg" alt="Croissant and Latte" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 11: Battle of the Beans award -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c11-award.jpg" alt="Battle of the Beans Award" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 12: Durban North storefront -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c12-storefront.jpg" alt="Durban North Storefront" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 13: Menu board -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c13-menu-board.jpg" alt="Menu Board" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 14: Gordon Road exterior -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c14-gordon-rd.jpg" alt="Gordon Road Location" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 15: Interior counter -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c15-interior.jpg" alt="Interior" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+      <!-- Slide 16: Skyline cups -->
+      <div class="carousel-slide" style="min-width:calc(100%/3.2);aspect-ratio:1;overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c16-cups.jpg" alt="Skyline Cups" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block;" />
+      </div>
+
+      <!-- ── ADD MORE SLIDES ABOVE THIS LINE ────────────── -->
+
+    </div>
+
+    <!-- Dot indicators -->
+    <div id="carouselDots" style="display:flex;justify-content:center;gap:6px;padding:1rem 0 1.2rem;"></div>
+
+  </section>
+  <section class="review-section" id="reviews">
+    <p class="review-label reveal">Voices of the Community</p>
+
+    <!-- Award badge -->
+    <div class="reveal" style="display:inline-flex;align-items:center;gap:1rem;background:var(--ink);color:var(--white);padding:0.8rem 1.4rem;border-radius:50px;margin-bottom:2.5rem;">
+      <img src="skyline-c11-award.jpg" alt="Award" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;" />
+      <div style="text-align:left;">
+        <p style="font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);line-height:1;margin-bottom:0.2rem;">Battle of the Beans 2025</p>
+        <p style="font-size:0.82rem;font-weight:500;color:var(--white);line-height:1;">Top 3 Best Coffee Shops · Durban North</p>
+      </div>
+    </div>
+
+    <!-- CLIENT: Featured review quote — pick the best Google review.
+         Keep it to 2-3 sentences max. Longer quotes lose impact. -->
+    <blockquote class="review-quote reveal">
+      "Absolutely love Skyline! Their coffee is consistently excellent, and the pastries are a must-try. It's got a fantastic, cozy atmosphere."
+    </blockquote>
+
+    <!-- CLIENT: Reviewer name and title -->
+    <p class="review-author reveal">— Sashen Chetty, Local Guide</p>
+  </section>
+
+  <!-- VISIT SECTION ───────────────────────────────────── -->
+  <section class="visit-section" id="visit">
+
+    <!-- Two locations heading -->
+    <div style="margin-bottom: 2rem;" class="reveal">
+      <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">Two Locations · Both Halaal</p>
+      <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--ink);letter-spacing:-0.02em;">Come find us.</h2>
+    </div>
+
+    <!-- Location cards row -->
+    <!-- CLIENT: Two location cards — update addresses, phones, and Maps links for each.
+         To add a third location: copy one .location-card block and paste it after the second.
+         The grid adjusts automatically. -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;" class="reveal">
+
+      <!-- Location 1: Durban North -->
+      <div style="background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
+        <div style="padding:2rem 2rem 1.5rem;">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Durban North Café</p>
+          <p style="font-family:var(--display);font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:0.2rem;line-height:1.2;">28 Mackeurtan Ave</p>
+          <p style="font-size:0.88rem;color:var(--stone);margin-bottom:1rem;">Durban North, 4051</p>
+          <a href="tel:+27824442492" style="font-size:0.95rem;color:var(--ink);display:block;margin-bottom:1.2rem;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px;">082 444 2492</a>
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;">
+            <a href="https://maps.google.com/?q=28+Mackeurtan+Ave+Durban+North" target="_blank" class="btn btn-solid">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Directions
+            </a>
+            <a href="tel:+27824442492" class="btn btn-ghost">Call</a>
+          </div>
+        </div>
+        <!-- CLIENT: Google Maps embed for Durban North location.
+             To update: go to maps.google.com > search the address > Share > Embed a map > copy the iframe src URL.
+             Paste the new src value below, replacing the existing one. -->
+        <div style="width:100%;height:220px;overflow:hidden;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.022576730023!2d31.0460281!3d-29.7769887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef707007b25a57f%3A0x6403ec15a4da33dd!2sSkyline%20Coffee%20Durban%20North!5e0!3m2!1sen!2sza!4v1785672448140!5m2!1sen!2sza"
+            width="100%" height="220"
+            style="border:0;display:block;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Location 2: Durban -->
+      <div style="background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
+        <div style="padding:2rem 2rem 1.5rem;">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Durban Café</p>
+          <p style="font-family:var(--display);font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:0.2rem;line-height:1.2;">155 Gordon Road</p>
+          <p style="font-size:0.88rem;color:var(--stone);margin-bottom:1rem;">Durban, KwaZulu-Natal 4001</p>
+          <a href="tel:+27824442492" style="font-size:0.95rem;color:var(--ink);display:block;margin-bottom:1.2rem;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px;">082 444 2492</a>
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;">
+            <a href="https://maps.google.com/?q=155+Gordon+Road+Durban" target="_blank" class="btn btn-solid">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Directions
+            </a>
+            <a href="tel:+27824442492" class="btn btn-ghost">Call</a>
+          </div>
+        </div>
+        <!-- CLIENT: Google Maps embed for Gordon Road location.
+             To update: go to maps.google.com > search the address > Share > Embed a map > copy the iframe src URL.
+             Paste the new src value below, replacing the existing one. -->
+        <div style="width:100%;height:220px;overflow:hidden;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110816.80727961751!2d30.966201223089676!3d-29.77691205017424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef707d010b4c05b%3A0x4f4dcdd3535ed796!2sSkyline%20Coffee%20Durban!5e0!3m2!1sen!2sza!4v1785672500788!5m2!1sen!2sza"
+            width="100%" height="220"
+            style="border:0;display:block;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hours card — applies to both locations unless different -->
+    <!-- CLIENT: If the two locations have different hours, duplicate this card
+         and place one inside each location card above instead. -->
+    <div style="background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;" class="reveal">
+      <div style="display:grid;grid-template-columns:auto 1fr;align-items:start;">
+
+        <div style="padding:2rem 2.5rem;border-right:1px solid var(--border);">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;">Trading Hours</p>
+          <div class="hours-row"><span class="day">Monday</span><span class="time">6AM – 3PM</span></div>
+          <div class="hours-row"><span class="day">Tuesday</span><span class="time">6AM – 3PM</span></div>
+          <div class="hours-row"><span class="day">Wednesday</span><span class="time">6AM – 3PM</span></div>
+          <div class="hours-row"><span class="day">Thursday</span><span class="time">6AM – 3PM</span></div>
+          <div class="hours-row"><span class="day">Friday</span><span class="time">6AM – 3PM</span></div>
+          <div class="hours-row"><span class="day">Saturday</span><span class="time">7AM – 2PM</span></div>
+          <div class="hours-row highlight"><span class="day">Sunday</span><span class="time">7AM – 1PM</span></div>
+          <p class="hours-note">* Special late-night pop-ups occasionally 8PM – 11:30PM</p>
+        </div>
+
+        <div style="padding:2rem 2.5rem;">
+          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;">Find Us Online</p>
+          <div style="display:flex;flex-direction:column;gap:0.8rem;">
+            <!-- CLIENT: Instagram link -->
+            <a href="https://instagram.com/skylinecoffeeza" target="_blank" style="font-size:0.88rem;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              @skylinecoffeeza · 14.8K followers
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER ──────────────────────────────────────────── -->
+  <footer>
+    <span class="footer-brand">
+      <img src="skyline-logo.png" alt="Skyline Coffee Co."
+      style="max-height:28px;width:auto;filter:invert(1);opacity:0.8;" />
+    </span>
+
+    <div class="footer-icons">
+      <a href="https://instagram.com/skylinecoffeeza" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://facebook.com/SkylineCoffeeza" target="_blank" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+
+    <span class="footer-price">R100 – R200 PER PERSON</span>
+  </footer>
+
+  <!-- GROUNDSITE CREDIT ───────────────────────────────── -->
+  <!-- This line credits Groundsite as the site builder.
+       Keep it here — it acts as passive marketing every time a client
+       shares their site link. To remove it, delete this entire section. -->
+  <div style="background: var(--ink); padding: 0.9rem 5vw; text-align: center; border-top: 1px solid rgba(255,255,255,0.06);">
+    <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.08em;">
+      Site by <a href="#" style="color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.06em;">Groundsite</a> · © 2026 Skyline Coffee Roasters
+    </p>
+  </div>
+
+  <script>
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
+
+    /* ── Carousel ── */
+    (function() {
+      const track   = document.getElementById('carouselTrack');
+      const dotsBox = document.getElementById('carouselDots');
+      if (!track) return;
+
+      const slides     = track.querySelectorAll('.carousel-slide');
+      const total      = slides.length;
+      let current      = 0;
+      let startX       = 0;
+      let isDragging   = false;
+      let dragOffset   = 0;
+
+      // Responsive: how many slides visible at once
+      function visibleCount() {
+        return window.innerWidth < 700 ? 1.2 : window.innerWidth < 1024 ? 2.2 : 3.2;
+      }
+
+      // Build dots
+      function buildDots() {
+        dotsBox.innerHTML = '';
+        const count = Math.ceil(total - Math.floor(visibleCount()) + 1);
+        for (let i = 0; i < count; i++) {
+          const d = document.createElement('div');
+          d.style.cssText = `width:6px;height:6px;border-radius:50%;background:${i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.25)'};transition:background 0.3s;cursor:pointer;`;
+          d.addEventListener('click', () => goTo(i));
+          dotsBox.appendChild(d);
+        }
+      }
+
+      function updateDots() {
+        const dots = dotsBox.querySelectorAll('div');
+        dots.forEach((d, i) => {
+          d.style.background = i === current ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.25)';
+        });
+      }
+
+      function getSlideWidth() {
+        return slides[0] ? slides[0].getBoundingClientRect().width : 0;
+      }
+
+      function goTo(index) {
+        const max = total - Math.floor(visibleCount());
+        current = Math.max(0, Math.min(index, max));
+        track.style.transition = 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)';
+        track.style.transform  = `translateX(-${current * getSlideWidth()}px)`;
+        updateDots();
+      }
+
+      window.slideCarousel = function(dir) { goTo(current + dir); };
+
+      // Mobile slide widths
+      function updateSlideWidths() {
+        const vc = visibleCount();
+        slides.forEach(s => { s.style.minWidth = `calc(100% / ${vc})`; });
+        goTo(current);
+        buildDots();
+        updateDots();
+      }
+
+      // Drag / swipe
+      track.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX; track.style.cursor = 'grabbing'; track.style.transition = 'none'; });
+      track.addEventListener('mousemove', e => { if (!isDragging) return; dragOffset = e.clientX - startX; track.style.transform = `translateX(${-current * getSlideWidth() + dragOffset}px)`; });
+      track.addEventListener('mouseup',   e => { if (!isDragging) return; isDragging = false; track.style.cursor = 'grab'; if (dragOffset < -60) goTo(current + 1); else if (dragOffset > 60) goTo(current - 1); else goTo(current); dragOffset = 0; });
+      track.addEventListener('mouseleave',e => { if (!isDragging) return; isDragging = false; track.style.cursor = 'grab'; goTo(current); dragOffset = 0; });
+
+      // Touch swipe
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; track.style.transition = 'none'; }, { passive: true });
+      track.addEventListener('touchmove',  e => { const dx = e.touches[0].clientX - startX; track.style.transform = `translateX(${-current * getSlideWidth() + dx}px)`; }, { passive: true });
+      track.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - startX; if (dx < -50) goTo(current + 1); else if (dx > 50) goTo(current - 1); else goTo(current); });
+
+      window.addEventListener('resize', updateSlideWidths);
+      updateSlideWidths();
+    })();
+    function toggleMobile() {
+      const menu = document.getElementById('mobileMenu');
+      const btn  = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
+</html>
