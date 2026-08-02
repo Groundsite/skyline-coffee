@@ -145,7 +145,7 @@
        Compress under 400KB at squoosh.app. */
     .hero-right { }
     .hero-photo {
-      width: 100%; aspect-ratio: 3/4; border-radius: 20px;
+      width: 100%; aspect-ratio: 5/6; border-radius: 20px;
       overflow: hidden; background: var(--ink);
       display: flex; align-items: center; justify-content: center; font-size: 8rem;
     }
@@ -310,6 +310,11 @@
            Keep each line short — this font is large.
            Example: "The morning's / best decision."
            Example: "Roasted with / intention." -->
+      <!-- CLIENT: Logo in hero — displays as a square above the headline.
+           Adjust width to make it bigger or smaller. Current: 77px (64px + 20%) -->
+      <img src="skyline-logo.png" alt="Skyline Coffee Co."
+        style="width:77px;height:77px;object-fit:cover;border-radius:8px;display:block;margin:0 auto 1.5rem;" />
+
       <h1 class="hero-title reveal">
         <span class="italic">Durban's finest</span>
         <span class="bold">Daily Ritual.</span>
