@@ -153,6 +153,7 @@
 
     /* ─── CAROUSEL ────────────────────────────────────── */
     .carousel-slide {
+      min-width: calc(100% / 4);
       height: 360px;
       overflow: hidden;
       flex-shrink: 0;
@@ -165,6 +166,12 @@
       border-radius: 4px;
       display: block;
       background: var(--ink);
+    }
+    @media (max-width: 1024px) {
+      .carousel-slide { min-width: calc(100% / 2.2); height: 300px; }
+    }
+    @media (max-width: 700px) {
+      .carousel-slide { min-width: calc(100% / 1.2); height: 260px; }
     }
 
     /* ─── BUTTONS ─────────────────────────────────────── */
@@ -272,11 +279,6 @@
         grid-template-columns: 1fr !important;
       }
       /* Gallery stacks to 2 columns on mobile */
-      /* Carousel mobile fix */
-      #carouselTrack .carousel-slide {
-        min-width: calc(100% / 1.2) !important;
-        height: 280px !important;
-      }
       /* Hero photo mobile */
       .hero-photo {
         aspect-ratio: 4/3 !important;
@@ -912,11 +914,6 @@
         const vc = visibleCount();
         slides.forEach(s => {
           s.style.minWidth = `calc(100% / ${vc})`;
-          if (window.innerWidth < 700) {
-            s.style.height = '280px';
-          } else {
-            s.style.height = '360px';
-          }
         });
         goTo(current);
         buildDots();
