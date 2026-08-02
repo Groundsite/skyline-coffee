@@ -151,6 +151,22 @@
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
 
+    /* ─── CAROUSEL ────────────────────────────────────── */
+    .carousel-slide {
+      height: 360px;
+      overflow: hidden;
+      flex-shrink: 0;
+      padding: 0 3px;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+      background: var(--ink);
+    }
+
     /* ─── BUTTONS ─────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -260,6 +276,11 @@
       #carouselTrack .carousel-slide {
         min-width: calc(100% / 1.2) !important;
         height: 280px !important;
+      }
+      /* Hero photo mobile */
+      .hero-photo {
+        aspect-ratio: 4/3 !important;
+        border-radius: 12px !important;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -469,68 +490,68 @@
       ── -->
 
       <!-- Slide 1: Chocolate cake -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c1-choc-cake.jpg" alt="Chocolate Cake" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c1-choc-cake.jpg" alt="Chocolate Cake" />
       </div>
       <!-- Slide 2: Breakfast wrap -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c2-breakfast-wrap.jpg" alt="Breakfast Wrap" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c2-breakfast-wrap.jpg" alt="Breakfast Wrap" />
       </div>
       <!-- Slide 3: Chocolate drink -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c3-choc-drink.jpg" alt="Chocolate Drink" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c3-choc-drink.jpg" alt="Chocolate Drink" />
       </div>
       <!-- Slide 4: Frappe -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c4-frappe.jpg" alt="Skyline Frappe" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c4-frappe.jpg" alt="Skyline Frappe" />
       </div>
       <!-- Slide 5: Coconut cake -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c5-coconut-cake.jpg" alt="Coconut Cake" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c5-coconut-cake.jpg" alt="Coconut Cake" />
       </div>
       <!-- Slide 6: Chicken wrap -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c6-chicken-wrap.jpg" alt="Chicken Wrap" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c6-chicken-wrap.jpg" alt="Chicken Wrap" />
       </div>
       <!-- Slide 7: Crepes -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c7-crepes.jpg" alt="Crepes" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c7-crepes.jpg" alt="Crepes" />
       </div>
       <!-- Slide 8: Smoothies -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c8-smoothies.jpg" alt="Smoothies" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c8-smoothies.jpg" alt="Smoothies" />
       </div>
       <!-- Slide 9: Toast and coffee -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c9-toast-coffee.jpg" alt="Toast and Coffee" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c9-toast-coffee.jpg" alt="Toast and Coffee" />
       </div>
       <!-- Slide 10: Croissant and latte -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c10-croissant-latte.jpg" alt="Croissant and Latte" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c10-croissant-latte.jpg" alt="Croissant and Latte" />
       </div>
       <!-- Slide 11: Battle of the Beans award -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c11-award.jpg" alt="Battle of the Beans Award" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c11-award.jpg" alt="Battle of the Beans Award" />
       </div>
       <!-- Slide 12: Durban North storefront -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c12-storefront.jpg" alt="Durban North Storefront" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c12-storefront.jpg" alt="Durban North Storefront" />
       </div>
       <!-- Slide 13: Menu board -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c13-menu-board.jpg" alt="Menu Board" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c13-menu-board.jpg" alt="Menu Board" />
       </div>
       <!-- Slide 14: Gordon Road exterior -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c14-gordon-rd.jpg" alt="Gordon Road Location" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c14-gordon-rd.jpg" alt="Gordon Road Location" />
       </div>
       <!-- Slide 15: Interior counter -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c15-interior.jpg" alt="Interior" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c15-interior.jpg" alt="Interior" />
       </div>
       <!-- Slide 16: Skyline cups -->
-      <div class="carousel-slide" style="min-width:calc(100%/4);height:360px;overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c16-cups.jpg" alt="Skyline Cups" style="width:100%;height:100%;object-fit:contain;border-radius:4px;display:block;background:var(--ink);" />
+      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
+        <img src="skyline-c16-cups.jpg" alt="Skyline Cups" />
       </div>
 
       <!-- ── ADD MORE SLIDES ABOVE THIS LINE ────────────── -->
