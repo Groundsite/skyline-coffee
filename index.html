@@ -60,19 +60,20 @@
       font-family: var(--body); font-size: 0.88rem; font-weight: 600;
       letter-spacing: 0.06em; color: var(--ink);
     }
-    /* CLIENT: Nav logo sizing
-       Current logo: skyline-logo.png (dark background, white text)
-       The logo has a dark background which blends into the linen nav —
-       to fix this properly, get a transparent PNG version of the logo
-       (remove background at remove.bg) and name it skyline-logo-transparent.png.
-       For now we use CSS filter to make the dark bg invisible:
-       filter: invert(1) — turns white logo dark to match the linen nav.
-       If the transparent PNG version is available, remove the filter line. */
+    /* CLIENT: Nav logo sizing — displays as a small dark circle */
     .nav-logo img {
-      max-height: 36px; width: auto; display: block; object-fit: contain;
+      max-height: 40px;
+      width: 40px;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
     }
     .footer-logo-img {
-      max-height: 28px; width: auto; display: block; object-fit: contain;
+      max-height: 32px;
+      width: 32px;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
     .nav-center { display: flex; gap: 2.5rem; list-style: none; }
@@ -669,7 +670,7 @@
   <footer>
     <span class="footer-brand">
       <img src="skyline-logo.png" alt="Skyline Coffee Co."
-      style="max-height:28px;width:auto;opacity:0.9;" />
+      style="max-height:36px;width:36px;object-fit:cover;border-radius:50%;display:block;" />
     </span>
 
     <div class="footer-icons">
