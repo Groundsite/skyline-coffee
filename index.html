@@ -311,9 +311,9 @@
            Example: "The morning's / best decision."
            Example: "Roasted with / intention." -->
       <!-- CLIENT: Logo in hero — displays as a square above the headline.
-           Adjust width to make it bigger or smaller. Current: 120px -->
+           Adjust width to make it bigger or smaller. Current: 156px (120px + 30%) -->
       <img src="skyline-logo.png" alt="Skyline Coffee Co."
-        style="width:120px;height:120px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 2rem;" />
+        style="width:156px;height:156px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 2rem;" />
 
       <h1 class="hero-title reveal">
         <span class="italic">Durban's finest</span>
@@ -323,14 +323,15 @@
       <!-- CLIENT: Hero subtext — one or two sentences max -->
       <p class="hero-sub reveal">Freshly roasted on Mackeurtan Avenue. A sanctuary for coffee purists and pastry lovers in the heart of Durban North.</p>
 
-      <!-- CLIENT: Rating badges — update rating, review count, and price range -->
+      <!-- CLIENT: Hero badges — update rating and review count when they change -->
       <div class="hero-badges reveal">
         <div class="badge">
           <span class="star">★</span>
           <span class="rating-num">4.0</span>
           <span class="reviews">12 REVIEWS</span>
         </div>
-        <div class="badge">R100 – R200 PER PERSON</div>
+        <div class="badge">Halaal Friendly</div>
+        <div class="badge">Battle of the Beans 2025</div>
       </div>
 
       <!-- ═══════════════════════════════════════════════════════
@@ -712,15 +713,54 @@
           <p class="hours-note">* Special late-night pop-ups occasionally 8PM – 11:30PM</p>
         </div>
 
-        <div style="padding:2rem 2.5rem;">
-          <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;">Find Us Online</p>
-          <div style="display:flex;flex-direction:column;gap:0.8rem;">
-            <!-- CLIENT: Instagram link -->
-            <a href="https://instagram.com/skylinecoffeeza" target="_blank" style="font-size:0.88rem;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              @skylinecoffeeza · 14.8K followers
-            </a>
+        <div style="padding:2rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+          <div>
+            <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;">Find Us Online</p>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+
+              <!-- Instagram -->
+              <a href="https://instagram.com/skylinecoffeeza" target="_blank" style="display:flex;align-items:center;gap:0.8rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </div>
+                <div>
+                  <p style="font-size:0.82rem;font-weight:500;color:var(--ink);line-height:1;margin-bottom:0.2rem;">@skylinecoffeeza</p>
+                  <p style="font-size:0.72rem;color:var(--stone);">14.8K followers</p>
+                </div>
+              </a>
+
+              <!-- Facebook -->
+              <a href="https://facebook.com/SkylineCoffeeza" target="_blank" style="display:flex;align-items:center;gap:0.8rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </div>
+                <div>
+                  <p style="font-size:0.82rem;font-weight:500;color:var(--ink);line-height:1;margin-bottom:0.2rem;">Skyline Coffee Roasters</p>
+                  <p style="font-size:0.72rem;color:var(--stone);">Follow us on Facebook</p>
+                </div>
+              </a>
+
+              <!-- Uber Eats -->
+              <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" style="display:flex;align-items:center;gap:0.8rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </div>
+                <div>
+                  <p style="font-size:0.82rem;font-weight:500;color:var(--ink);line-height:1;margin-bottom:0.2rem;">Order on Uber Eats</p>
+                  <p style="font-size:0.72rem;color:var(--stone);">Delivery & collection</p>
+                </div>
+              </a>
+
+            </div>
           </div>
+
+          <!-- Tagline + logo bottom right -->
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:2rem;">
+            <p style="font-family:var(--display);font-size:1rem;font-style:italic;font-weight:400;color:var(--stone);line-height:1.4;">Roasted with love<br/>in Durban.</p>
+            <img src="skyline-logo.png" alt="Skyline Coffee Co."
+              style="width:56px;height:56px;object-fit:cover;border-radius:50%;display:block;flex-shrink:0;" />
+          </div>
+
         </div>
 
       </div>
@@ -728,34 +768,8 @@
 
   </section>
 
-  <!-- FOOTER ──────────────────────────────────────────── -->
-  <footer>
-    <span class="footer-brand">
-      <img src="skyline-logo.png" alt="Skyline Coffee Co."
-      style="max-height:36px;width:36px;object-fit:cover;border-radius:50%;display:block;" />
-    </span>
-
-    <div class="footer-icons">
-      <a href="https://instagram.com/skylinecoffeeza" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-      </a>
-      <a href="https://facebook.com/SkylineCoffeeza" target="_blank" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-        </svg>
-      </a>
-    </div>
-
-    <span class="footer-price">R100 – R200 PER PERSON</span>
-  </footer>
-
   <!-- GROUNDSITE CREDIT ───────────────────────────────── -->
-  <!-- This line credits Groundsite as the site builder.
-       Keep it here — it acts as passive marketing every time a client
-       shares their site link. To remove it, delete this entire section. -->
-  <div style="background: var(--ink); padding: 0.9rem 5vw; text-align: center; border-top: 1px solid rgba(255,255,255,0.06);">
+  <div style="background: var(--ink); padding: 0.9rem 5vw; text-align: center;">
     <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.08em;">
       Site by <a href="#" style="color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.06em;">Groundsite</a> · © 2026 Skyline Coffee Roasters
     </p>
