@@ -830,7 +830,35 @@
     </p>
   </div>
 
+  <!-- LIGHTBOX ────────────────────────────────────────── -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;cursor:zoom-out;" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" style="position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;">✕</button>
+    <img id="lightboxImg" src="" alt="" style="max-width:92vw;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 60px rgba(0,0,0,0.8);cursor:default;" onclick="event.stopPropagation()" />
+  </div>
   <script>
+    /* ── Lightbox ── */
+    function openLightbox(src, alt) {
+      const lb  = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src; img.alt = alt;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#carouselTrack .carousel-slide img').forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', e => {
+          e.stopPropagation();
+          openLightbox(img.src, img.alt);
+        });
+      });
+    });
+
     /* ── Scroll reveal ── */
     const revealEls = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver((entries) => {
