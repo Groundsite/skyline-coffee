@@ -170,10 +170,6 @@
     @media (max-width: 1024px) {
       .carousel-slide { min-width: calc(100% / 2.2); height: 300px; }
     }
-    @media (max-width: 700px) {
-      .carousel-slide { min-width: calc(100% / 1.2); height: 260px; }
-    }
-
     /* ─── BUTTONS ─────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -265,24 +261,34 @@
       .mobile-menu { display: flex; }
       .hero { grid-template-columns: 1fr; padding-top: 5rem; }
       .hero-right { order: -1; }
-      .hero-photo { aspect-ratio: 16/9; border-radius: 12px; }
+      .hero-photo {
+        aspect-ratio: 4/3;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .hero-photo img {
+        object-fit: cover !important;
+        border-radius: 12px;
+      }
       .pillars-grid { grid-template-columns: 1fr; gap: 2rem; }
       .visit-card { grid-template-columns: 1fr; }
       .visit-left { border-right: none; border-bottom: 1px solid var(--border); }
       .hero-title { font-size: clamp(2.5rem, 9vw, 4rem); }
-      /* Two location cards stack on mobile */
       .visit-section > div[style*="grid-template-columns:1fr 1fr"] {
         grid-template-columns: 1fr !important;
       }
-      /* Hours + online grid stacks on mobile */
       .visit-section div[style*="grid-template-columns:auto 1fr"] {
         grid-template-columns: 1fr !important;
       }
-      /* Gallery stacks to 2 columns on mobile */
-      /* Hero photo mobile */
-      .hero-photo {
-        aspect-ratio: 4/3 !important;
-        border-radius: 12px !important;
+      .carousel-slide {
+        min-width: calc(100% / 1.2) !important;
+        height: 260px !important;
+      }
+      .carousel-slide img {
+        object-fit: cover !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
       }
     }
     @media (prefers-reduced-motion: reduce) {
