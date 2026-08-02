@@ -152,23 +152,33 @@
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
 
     /* ─── CAROUSEL ────────────────────────────────────── */
-    .carousel-slide {
-      min-width: calc(100% / 4);
-      height: 360px;
+    .carousel-wrap {
       overflow: hidden;
-      flex-shrink: 0;
-      padding: 0 3px;
+      width: 100%;
+    }
+    .carousel-track-inner {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
+    }
+    .carousel-slide {
+      flex: 0 0 25%;
+      height: 320px;
+      padding: 0 4px;
+      box-sizing: border-box;
     }
     .carousel-slide img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      border-radius: 4px;
+      object-fit: cover;
+      border-radius: 6px;
       display: block;
-      background: var(--ink);
     }
     @media (max-width: 1024px) {
-      .carousel-slide { min-width: calc(100% / 2.2); height: 300px; }
+      .carousel-slide { flex: 0 0 50%; height: 280px; }
+    }
+    @media (max-width: 860px) {
+      .carousel-slide { flex: 0 0 100%; height: 260px; padding: 0 1rem; }
     }
     /* ─── BUTTONS ─────────────────────────────────────── */
     .btn {
@@ -289,8 +299,8 @@
         grid-template-columns: 1fr !important;
       }
       .carousel-slide {
-        min-width: 100% !important;
-        height: 320px !important;
+        flex: 0 0 100% !important;
+        height: 260px !important;
         padding: 0 1rem !important;
       }
       .carousel-slide img {
@@ -495,7 +505,8 @@
     </button>
 
     <!-- Carousel track -->
-    <div id="carouselTrack" style="display:flex;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;cursor:grab;user-select:none;" class="carousel-track">
+    <div class="carousel-wrap">
+      <div id="carouselTrack" class="carousel-track-inner" style="cursor:grab;user-select:none;">
 
       <!-- ── CAROUSEL ITEMS ─────────────────────────────
            Each item below is one slide. Add or remove freely.
@@ -572,6 +583,7 @@
       <!-- ── ADD MORE SLIDES ABOVE THIS LINE ────────────── -->
 
     </div>
+    </div><!-- end carousel-wrap -->
 
     <!-- Dot indicators -->
     <div id="carouselDots" style="display:flex;justify-content:center;gap:6px;padding:0.8rem 0 1rem;background:var(--ink);"></div>
@@ -878,110 +890,74 @@
       const total   = slides.length;
       let current   = 0;
       let startX    = 0;
-      let isDragging = false;
-      let dragStart  = 0;
 
-      function isMobile() { return window.innerWidth <= 860; }
-
-      function visibleCount() {
-        if (window.innerWidth <= 860) return 1;
-        if (window.innerWidth <= 1024) return 2.2;
+      function perView() {
+        if (window.innerWidth <= 860)  return 1;
+        if (window.innerWidth <= 1024) return 2;
         return 4;
       }
 
-      function slideWidthPct() {
-        return 100 / visibleCount();
+      function maxIndex() { return total - perView(); }
+
+      function goTo(i) {
+        current = Math.max(0, Math.min(i, maxIndex()));
+        const pct = current * (100 / perView());
+        track.style.transition = 'transform 0.4s ease';
+        track.style.transform  = `translateX(-${pct}%)`;
+        updateDots();
       }
+
+      window.slideCarousel = function(dir) { goTo(current + dir); };
 
       function buildDots() {
         dotsBox.innerHTML = '';
-        const count = isMobile() ? total : Math.ceil(total - Math.floor(visibleCount()) + 1);
-        for (let i = 0; i < count; i++) {
+        const count = maxIndex() + 1;
+        for (let i = 0; i <= maxIndex(); i++) {
           const d = document.createElement('div');
-          d.style.cssText = `width:6px;height:6px;border-radius:50%;background:${i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.25)'};transition:background 0.3s;cursor:pointer;flex-shrink:0;`;
+          d.style.cssText = `width:6px;height:6px;border-radius:50%;background:${i === 0 ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)'};transition:background 0.3s;cursor:pointer;flex-shrink:0;`;
           d.addEventListener('click', () => goTo(i));
           dotsBox.appendChild(d);
         }
       }
 
       function updateDots() {
-        const dots = dotsBox.querySelectorAll('div');
-        dots.forEach((d, i) => {
-          d.style.background = i === current ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.25)';
+        dotsBox.querySelectorAll('div').forEach((d, i) => {
+          d.style.background = i === current ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)';
         });
       }
-
-      function updateSlideWidths() {
-        const vc = visibleCount();
-        slides.forEach(s => { s.style.minWidth = `calc(100% / ${vc})`; });
-      }
-
-      function getTranslate() {
-        if (isMobile()) return current * 100;
-        return current * slideWidthPct();
-      }
-
-      function goTo(index) {
-        const max = isMobile() ? total - 1 : total - Math.floor(visibleCount());
-        current = Math.max(0, Math.min(index, max));
-        track.style.transition = 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)';
-        track.style.transform  = `translateX(-${getTranslate()}%)`;
-        updateDots();
-      }
-
-      window.slideCarousel = function(dir) { goTo(current + dir); };
 
       // Touch swipe
       track.addEventListener('touchstart', e => {
         startX = e.touches[0].clientX;
-        track.style.transition = 'none';
-      }, { passive: true });
-
-      track.addEventListener('touchmove', e => {
-        const dx = e.touches[0].clientX - startX;
-        const base = isMobile() ? current * 100 : current * slideWidthPct();
-        const pct  = (dx / track.offsetWidth) * 100;
-        track.style.transform = `translateX(calc(-${base}% + ${dx}px))`;
       }, { passive: true });
 
       track.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - startX;
         if (dx < -40) goTo(current + 1);
         else if (dx > 40) goTo(current - 1);
-        else goTo(current);
       });
 
-      // Mouse drag (desktop)
-      track.addEventListener('mousedown', e => {
-        isDragging = true; dragStart = e.clientX;
-        track.style.cursor = 'grabbing'; track.style.transition = 'none';
-      });
+      // Mouse drag
+      let dragging = false, mx = 0;
+      track.addEventListener('mousedown', e => { dragging = true; mx = e.clientX; track.style.transition = 'none'; track.style.cursor = 'grabbing'; });
       track.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        const dx = e.clientX - dragStart;
-        const base = isMobile() ? current * 100 : current * slideWidthPct();
+        if (!dragging) return;
+        const dx = e.clientX - mx;
+        const base = current * (100 / perView());
         track.style.transform = `translateX(calc(-${base}% + ${dx}px))`;
       });
       track.addEventListener('mouseup', e => {
-        if (!isDragging) return;
-        isDragging = false; track.style.cursor = 'grab';
-        const dx = e.clientX - dragStart;
+        if (!dragging) return;
+        dragging = false; track.style.cursor = 'grab';
+        const dx = e.clientX - mx;
         if (dx < -60) goTo(current + 1);
         else if (dx > 60) goTo(current - 1);
         else goTo(current);
       });
-      track.addEventListener('mouseleave', () => {
-        if (!isDragging) return;
-        isDragging = false; goTo(current);
-      });
+      track.addEventListener('mouseleave', () => { if (dragging) { dragging = false; goTo(current); } });
 
-      window.addEventListener('resize', () => {
-        updateSlideWidths();
-        buildDots();
-        goTo(current);
-      });
+      window.addEventListener('resize', () => { goTo(Math.min(current, maxIndex())); buildDots(); });
 
-      updateSlideWidths();
       buildDots();
       goTo(0);
     })();
