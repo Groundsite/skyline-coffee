@@ -216,7 +216,7 @@
 
     /* ─── THREE COLUMN DARK SECTION ──────────────────── */
     .pillars {
-      background: var(--ink); padding: 3.5rem 5vw;
+      background: var(--ink); padding: 0 5vw 3.5rem;
     }
     .pillars-rule { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 3.5rem; }
     .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
@@ -397,13 +397,13 @@
 
   <!-- THREE PILLARS (DARK SECTION) ───────────────────── -->
   <section class="pillars" id="beans">
-    <!-- Halaal Friendly badge — centred above the rule line -->
-    <div style="display:flex;align-items:center;justify-content:center;padding-bottom:2rem;">
+    <!-- Halaal Friendly badge — perfectly centred with equal space above and below -->
+    <div style="display:flex;align-items:center;justify-content:center;width:100%;padding:2rem 0;">
       <span style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.25);padding:0.5rem 1.4rem;border-radius:50px;">
         ☽&nbsp; Halaal Friendly
       </span>
     </div>
-    <hr class="pillars-rule" />
+    <hr class="pillars-rule" style="margin-bottom:2rem;" />
     <div class="pillars-grid">
 
       <!-- CLIENT: Pillar 1 — The Coffee -->
