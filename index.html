@@ -105,50 +105,66 @@
 
     /* ─── HERO ────────────────────────────────────────── */
     .hero {
-      min-height: 100svh; padding: 5rem 5vw 4rem;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 3rem; align-items: center;
-      background: var(--linen);
+      min-height: 100svh;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
     }
-    .hero-left { }
-    /* CLIENT: Hero headline — large italic serif + bold on second line */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('skyline-hero.jpg') center center / cover no-repeat;
+      background-color: var(--ink);
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,13,13,0.5) 0%,
+        rgba(13,13,13,0.65) 50%,
+        rgba(13,13,13,0.82) 100%
+      );
+    }
+    .hero-content-overlay {
+      position: relative; z-index: 1;
+      max-width: 720px; padding: 8rem 5vw 4rem; width: 100%;
+    }
     .hero-title {
       font-family: var(--display);
-      font-size: clamp(3rem, 6.5vw, 6rem);
-      line-height: 1.0; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 1.2rem;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      line-height: 0.95; letter-spacing: -0.025em;
+      color: var(--white); margin-bottom: 1.2rem;
     }
     .hero-title .italic { font-style: italic; font-weight: 400; display: block; }
     .hero-title .bold   { font-style: normal; font-weight: 700; display: block; }
-
-    /* CLIENT: Hero subtext */
-    .hero-sub { font-size: 0.9rem; color: var(--stone); max-width: 380px; margin-bottom: 1.8rem; line-height: 1.7; }
-
-    /* Rating badges */
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.8rem; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.45rem 1rem; border-radius: 50px;
-      border: 1px solid var(--border); background: var(--white);
-      font-size: 0.78rem; font-weight: 400; color: var(--ink);
+    .hero-sub {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: rgba(255,255,255,0.72);
+      max-width: 480px; margin: 0 auto 0.8rem;
+      font-weight: 300; line-height: 1.7;
     }
+    .hero-rating {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--sand); letter-spacing: 0.06em; margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+    .btn-hero-outline {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.75rem 1.5rem; border-radius: 50px;
+      font-family: var(--body); font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s;
+      background: rgba(255,255,255,0.12); color: var(--white);
+      border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(8px);
+    }
+    .btn-hero-outline:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.6); }
+
+    .hero-left { }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.8rem; }
+    .badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1rem; border-radius: 50px; border: 1px solid var(--border); background: var(--white); font-size: 0.78rem; font-weight: 400; color: var(--ink); }
     .badge .star { color: var(--accent); font-size: 0.85rem; }
     .badge .rating-num { font-weight: 600; }
     .badge .reviews { color: var(--stone); font-size: 0.72rem; }
-
-    /* Hero action buttons */
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-
-    /* CLIENT: Hero photo — tall rounded rectangle right side
-       Replace 'hero-photo.jpg' with the client's coffee/food photo.
-       Best: portrait-orientation photo, coffee being poured, latte art, or food.
-       Compress under 400KB at squoosh.app. */
     .hero-right { }
-    .hero-photo {
-      width: 100%; aspect-ratio: 5/6; border-radius: 20px;
-      overflow: hidden; background: var(--ink);
-      display: flex; align-items: center; justify-content: center; font-size: 8rem;
-    }
+    .hero-photo { width: 100%; aspect-ratio: 5/6; border-radius: 20px; overflow: hidden; background: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 8rem; }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
 
     /* ─── CAROUSEL ────────────────────────────────────── */
@@ -269,29 +285,11 @@
       .nav-center, .nav-cta { display: none; }
       .hamburger { display: flex; }
       .mobile-menu { display: flex; }
-      .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        padding-top: 5rem;
-      }
-      .hero-left { order: 1; }
-      .hero-right {
-        order: 2;
-        margin-top: 2rem;
-      }
-      .hero-photo {
-        aspect-ratio: 4/3;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .hero-photo img {
-        object-fit: cover !important;
-        border-radius: 12px;
-      }
+      .hero-content-overlay { padding: 7rem 5vw 3rem; }
+      .hero-title { font-size: clamp(2.5rem, 9vw, 4rem); }
       .pillars-grid { grid-template-columns: 1fr; gap: 2rem; }
       .visit-card { grid-template-columns: 1fr; }
       .visit-left { border-right: none; border-bottom: 1px solid var(--border); }
-      .hero-title { font-size: clamp(2.5rem, 9vw, 4rem); }
       .visit-section > div[style*="grid-template-columns:1fr 1fr"] {
         grid-template-columns: 1fr !important;
       }
@@ -320,11 +318,11 @@
 
   <!-- MOBILE MENU ─────────────────────────────────────── -->
   <div class="mobile-menu" id="mobileMenu">
-    <!-- CLIENT: Mobile nav links -->
     <a href="#beans" onclick="closeMobile()">The Beans</a>
     <a href="#reviews" onclick="closeMobile()">Reviews</a>
     <a href="#visit" onclick="closeMobile()">Visit Us</a>
-    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" class="mob-cta" onclick="closeMobile()">Order Now</a>
+    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" onclick="closeMobile()" style="font-family:var(--body);font-size:0.9rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">Order on Uber Eats ↗</a>
+    <a href="menu.pdf" target="_blank" onclick="closeMobile()" style="font-family:var(--body);font-size:0.9rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--stone);">View Menu</a>
   </div>
 
   <!-- NAV ─────────────────────────────────────────────── -->
@@ -352,90 +350,55 @@
 
   <!-- HERO ────────────────────────────────────────────── -->
   <section class="hero" id="home">
-    <div class="hero-left">
+    <!-- Background image with dark overlay -->
+    <div class="hero-bg"></div>
 
-      <!-- CLIENT: Hero headline — italic line on top, bold line below
-           Keep each line short — this font is large.
-           Example: "The morning's / best decision."
-           Example: "Roasted with / intention." -->
-      <!-- CLIENT: Logo in hero — displays as a square above the headline.
-           Adjust width to make it bigger or smaller. Current: 210px -->
+    <!-- All content centred over the image -->
+    <div class="hero-content-overlay">
+
+      <!-- Logo -->
       <img src="skyline-logo.png" alt="Skyline Coffee Co."
-        style="width:210px;height:210px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 2rem;" />
+        style="width:140px;height:140px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 2rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);" />
 
+      <!-- Headline -->
       <h1 class="hero-title reveal">
         <span class="italic">Durban's finest</span>
         <span class="bold">Daily Ritual.</span>
       </h1>
 
-      <!-- CLIENT: Hero subtext — one or two sentences max -->
+      <!-- Subtext -->
       <p class="hero-sub reveal">Freshly roasted on Mackeurtan Avenue. A sanctuary for coffee purists and pastry lovers in the heart of Durban North.</p>
 
-      <!-- CLIENT: Hero badges — update rating and review count when they change -->
-      <div class="hero-badges reveal">
-        <div class="badge">
-          <span class="star">★</span>
-          <span class="rating-num">4.0</span>
-          <span class="reviews">12 REVIEWS</span>
-        </div>
-        <div class="badge">Halaal Friendly</div>
-        <div class="badge">Battle of the Beans 2025</div>
-      </div>
+      <!-- Inline star rating -->
+      <p class="hero-rating reveal">★ 4.0 &nbsp;·&nbsp; 12+ Google Reviews</p>
 
-      <!-- ═══════════════════════════════════════════════════════
-           CLIENT: HERO ACTION BUTTONS
-           Current buttons match the Lovable design exactly:
-           Order Collection · Order Delivery · Directions · Call
-
-           TO LINK ORDER COLLECTION TO UBER EATS:
-           Change href="#" on "Order Collection" to the Uber Eats URL.
-
-           TO LINK ORDER DELIVERY TO MR D:
-           Change href="#" on "Order Delivery" to the Mr D URL.
-
-           TO ADD WHATSAPP:
-           <a href="https://wa.me/27824442492" class="btn btn-whatsapp">WhatsApp</a>
-
-           TO REMOVE A BUTTON:
-           Delete the <a> tag. Flex layout recentres automatically.
-      ═══════════════════════════════════════════════════════ -->
+      <!-- Buttons — Uber Eats removed, View Menu + Directions + Call remain -->
       <div class="hero-actions reveal">
-        <!-- CLIENT: Order button — links to Uber Eats -->
-        <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" class="btn btn-solid">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Order on Uber Eats
-        </a>
-        <!-- CLIENT: Menu PDF button -->
-        <a href="menu.pdf" target="_blank" class="btn btn-ghost">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <a href="menu.pdf" target="_blank" class="btn btn-hero-outline">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           View Menu
         </a>
-        <!-- CLIENT: Directions button — Google Maps -->
-        <a href="https://maps.google.com/?q=28+Mackeurtan+Ave+Durban+North" target="_blank" class="btn btn-ghost">
+        <a href="https://maps.google.com/?q=28+Mackeurtan+Ave+Durban+North" target="_blank" class="btn btn-hero-outline">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Directions
         </a>
-        <!-- CLIENT: Call button -->
-        <a href="tel:+27824442492" class="btn btn-ghost">
+        <a href="tel:+27824442492" class="btn btn-hero-outline">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.38 2 2 0 0 1 3.92 1.17l3-.02a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
           Call
         </a>
       </div>
-    </div>
 
-    <div class="hero-right reveal">
-      <!-- CLIENT: Hero photo — tall portrait image right side of hero.
-           Current image: skyline-hero.jpg (Skyline branded latte cup)
-           To swap: rename your new photo to skyline-hero.jpg and replace in the folder.
-           Portrait orientation works best here. Compress under 400KB at squoosh.app. -->
-      <div class="hero-photo">
-        <img src="skyline-hero.jpg" alt="Skyline Coffee" />
-      </div>
     </div>
   </section>
 
   <!-- THREE PILLARS (DARK SECTION) ───────────────────── -->
   <section class="pillars" id="beans">
+    <!-- Halaal Friendly badge — centred above the rule line -->
+    <div style="text-align:center;margin-bottom:2rem;">
+      <span style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--mist);border:1px solid rgba(255,255,255,0.15);padding:0.4rem 1.2rem;border-radius:50px;">
+        ☽ Halaal Friendly
+      </span>
+    </div>
     <hr class="pillars-rule" />
     <div class="pillars-grid">
 
