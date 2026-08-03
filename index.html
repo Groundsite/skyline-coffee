@@ -14,10 +14,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- CLIENT: Page title -->
   <title>Skyline Coffee Roasters — Durban North</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+    /* ─── LOCAL FONTS ─────────────────────────────────── */
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('playfair-display-v40-latin-regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('playfair-display-v40-latin-italic.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('playfair-display-v40-latin-700.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('inter-v20-latin-300.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('inter-v20-latin-regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('inter-v20-latin-500.woff2') format('woff2');
+    }
     /* ─── TOKENS ──────────────────────────────────────── */
     :root {
       /* CLIENT: Brand colours
@@ -325,8 +365,8 @@
     <a href="#beans" onclick="closeMobile()">The Beans</a>
     <a href="#reviews" onclick="closeMobile()">Reviews</a>
     <a href="#visit" onclick="closeMobile()">Visit Us</a>
-    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" onclick="closeMobile()" style="font-family:var(--body);font-size:0.9rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">Order on Uber Eats ↗</a>
     <a href="menu.pdf" target="_blank" onclick="closeMobile()" style="font-family:var(--body);font-size:0.9rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--stone);">View Menu</a>
+    <a href="https://www.ubereats.com/za/store/skyline-coffee-roasters-durban-north/aEjYwmZ9U_6mq0mziq_EkQ" target="_blank" onclick="closeMobile()" class="mob-cta">Order on Uber Eats</a>
   </div>
 
   <!-- NAV ─────────────────────────────────────────────── -->
@@ -522,31 +562,6 @@
       <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
         <img src="skyline-c10-croissant-latte.jpg" alt="Croissant and Latte" />
       </div>
-      <!-- Slide 11: Battle of the Beans award -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c11-award.jpg" alt="Battle of the Beans Award" />
-      </div>
-      <!-- Slide 12: Durban North storefront -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c12-storefront.jpg" alt="Durban North Storefront" />
-      </div>
-      <!-- Slide 13: Menu board -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c13-menu-board.jpg" alt="Menu Board" />
-      </div>
-      <!-- Slide 14: Gordon Road exterior -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c14-gordon-rd.jpg" alt="Gordon Road Location" />
-      </div>
-      <!-- Slide 15: Interior counter -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c15-interior.jpg" alt="Interior" />
-      </div>
-      <!-- Slide 16: Skyline cups -->
-      <div class="carousel-slide" style="overflow:hidden;flex-shrink:0;padding:0 3px;">
-        <img src="skyline-c16-cups.jpg" alt="Skyline Cups" />
-      </div>
-
       <!-- ── ADD MORE SLIDES ABOVE THIS LINE ────────────── -->
 
     </div>
