@@ -228,7 +228,7 @@
     .pillar-body { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
     /* ─── REVIEW SECTION ──────────────────────────────── */
-    .review-section { background: var(--linen); padding: var(--gap) 5vw; text-align: center; }
+    .review-section { background: var(--linen); padding: 3rem 5vw 2.5rem; text-align: center; }
     .review-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--stone); margin-bottom: 2.5rem; }
     .review-quote {
       font-family: var(--display); font-size: clamp(1.1rem, 2vw, 1.6rem);
@@ -643,10 +643,15 @@
   </section>
 
   <!-- VISIT SECTION ───────────────────────────────────── -->
+  <!-- Separator between reviews and visit -->
+  <div style="padding: 0 5vw;">
+    <hr style="border:none;border-top:1px solid rgba(13,13,13,0.1);margin:0;" />
+  </div>
+
   <section class="visit-section" id="visit">
 
     <!-- Two locations heading -->
-    <div style="margin-bottom: 2rem;" class="reveal">
+    <div style="margin-bottom: 2rem;padding-top:3rem;" class="reveal">
       <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">Two Locations · Both Halaal</p>
       <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--ink);letter-spacing:-0.02em;">Come find us.</h2>
     </div>
@@ -717,9 +722,14 @@
 
     </div>
 
+    <!-- Separator + label between maps and hours -->
+    <div style="display:flex;align-items:center;gap:1.5rem;margin:2.5rem 0 1.5rem;">
+      <hr style="flex:1;border:none;border-top:1px solid rgba(13,13,13,0.1);" />
+      <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--stone);white-space:nowrap;">Hours & Info</span>
+      <hr style="flex:1;border:none;border-top:1px solid rgba(13,13,13,0.1);" />
+    </div>
+
     <!-- Hours card — applies to both locations unless different -->
-    <!-- CLIENT: If the two locations have different hours, duplicate this card
-         and place one inside each location card above instead. -->
     <div style="background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;" class="reveal">
       <div style="display:grid;grid-template-columns:auto 1fr;align-items:start;">
 
