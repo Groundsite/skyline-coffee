@@ -130,9 +130,9 @@
     }
     .hero-title {
       font-family: var(--display);
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      line-height: 0.95; letter-spacing: -0.025em;
-      color: var(--white); margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 1rem;
     }
     .hero-title .italic { font-style: italic; font-weight: 400; display: block; }
     .hero-title .bold   { font-style: normal; font-weight: 700; display: block; }
@@ -143,9 +143,13 @@
       font-weight: 300; line-height: 1.7;
     }
     .hero-rating {
-      font-size: 0.82rem; font-weight: 500;
-      color: var(--sand); letter-spacing: 0.06em; margin-bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--white); color: var(--ink);
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.04em; padding: 0.45rem 1rem;
+      border-radius: 50px; margin-bottom: 1.8rem;
     }
+    .hero-rating .star { color: var(--accent); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
     .btn-hero-outline {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -358,7 +362,7 @@
 
       <!-- Logo -->
       <img src="skyline-logo.png" alt="Skyline Coffee Co."
-        style="width:140px;height:140px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 2rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);" />
+        style="width:100px;height:100px;object-fit:cover;border-radius:10px;display:block;margin:0 auto 1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);" />
 
       <!-- Headline -->
       <h1 class="hero-title reveal">
@@ -370,7 +374,7 @@
       <p class="hero-sub reveal">Freshly roasted on Mackeurtan Avenue. A sanctuary for coffee purists and pastry lovers in the heart of Durban North.</p>
 
       <!-- Inline star rating -->
-      <p class="hero-rating reveal">★ 4.0 &nbsp;·&nbsp; 12+ Google Reviews</p>
+      <p class="hero-rating reveal"><span class="star">★</span> 4.0 &nbsp;·&nbsp; 12+ Google Reviews</p>
 
       <!-- Buttons — Uber Eats removed, View Menu + Directions + Call remain -->
       <div class="hero-actions reveal">
@@ -394,9 +398,9 @@
   <!-- THREE PILLARS (DARK SECTION) ───────────────────── -->
   <section class="pillars" id="beans">
     <!-- Halaal Friendly badge — centred above the rule line -->
-    <div style="text-align:center;margin-bottom:2rem;">
-      <span style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--mist);border:1px solid rgba(255,255,255,0.15);padding:0.4rem 1.2rem;border-radius:50px;">
-        ☽ Halaal Friendly
+    <div style="display:flex;align-items:center;justify-content:center;padding-bottom:2rem;">
+      <span style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.25);padding:0.5rem 1.4rem;border-radius:50px;">
+        ☽&nbsp; Halaal Friendly
       </span>
     </div>
     <hr class="pillars-rule" />
